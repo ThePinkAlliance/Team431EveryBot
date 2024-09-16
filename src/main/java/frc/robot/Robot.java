@@ -28,8 +28,8 @@ public class Robot extends TimedRobot {
    * Autonomous selection options.
    */
   private static final String kNothingAuto = "do nothing";
-  private static final String kLaunchAndDrive = "launch drive";
-  private static final String kLaunch = "launch";
+  // private static final String kLaunchAndDrive = "launch drive";
+  // private static final String kLaunch = "launch";
   private static final String kDrive = "drive";
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
@@ -61,13 +61,13 @@ public class Robot extends TimedRobot {
    *
   ich are brushed motors
    */
-  CANSparkBase m_launchWheel = new CANSparkMax(16, MotorType.kBrushed);
-  CANSparkBase m_feedWheel = new CANSparkMax(5, MotorType.kBrushed);
+  // CANSparkBase m_launchWheel = new CANSparkMax(16, MotorType.kBrushed);
+  // CANSparkBase m_feedWheel = new CANSparkMax(5, MotorType.kBrushed);
 
   /**
    * Roller Claw motor controller instance.
   */
-  CANSparkBase m_rollerClaw = new CANSparkMax(8, MotorType.kBrushed);
+  // CANSparkBase m_rollerClaw = new CANSparkMax(8, MotorType.kBrushed);
   /**
    * Climber motor controller instance. In the stock Everybot configuration a
    * NEO is used, replace with kBrushed if using a brushed motor.
@@ -105,43 +105,43 @@ public class Robot extends TimedRobot {
   /**
    * Percent output to run the feeder when expelling note
    */
-  static final double FEEDER_OUT_SPEED = 1.0;
+  // static final double FEEDER_OUT_SPEED = 1.0;
 
-  /**
-   * Percent output to run the feeder when intaking note
-   */
-  static final double FEEDER_IN_SPEED = -.4;
+  // /**
+  //  * Percent output to run the feeder when intaking note
+  //  */
+  // static final double FEEDER_IN_SPEED = -.4;
 
   /**
    * Percent output for amp or drop note, configure based on polycarb bend
    */
-  static final double FEEDER_AMP_SPEED = .4;
+  // static final double FEEDER_AMP_SPEED = .4;
 
-  /**
-   * How many amps the launcher motor can use.
-   *
-   * In our testing we favored the CIM over NEO, if using a NEO lower this to 60
-   */
-  static final int LAUNCHER_CURRENT_LIMIT_A = 60;
+  // /**
+  //  * How many amps the launcher motor can use.
+  //  *
+  //  * In our testing we favored the CIM over NEO, if using a NEO lower this to 60
+  //  */
+  // static final int LAUNCHER_CURRENT_LIMIT_A = 60;
 
-  /**
-   * Percent output to run the launcher when intaking AND expelling note
-   */
-  static final double LAUNCHER_SPEED = 1.0;
+  // /**
+  //  * Percent output to run the launcher when intaking AND expelling note
+  //  */
+  // static final double LAUNCHER_SPEED = 1.0;
 
   /**
    * Percent output for scoring in amp or dropping note, configure based on polycarb bend
    * .14 works well with no bend from our testing
    */
-  static final double LAUNCHER_AMP_SPEED = .17;
+  //static final double LAUNCHER_AMP_SPEED = .17;
   /**
    * Percent output for the roller claw
    */
-  static final double CLAW_OUTPUT_POWER = .5;
+  //static final double CLAW_OUTPUT_POWER = .5;
   /**
    * Percent output to help retain notes in the claw
    */
-  static final double CLAW_STALL_POWER = .1;
+  //static final double CLAW_STALL_POWER = .1;
   /**
    * Percent output to power the climber
    */
@@ -154,8 +154,6 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_chooser.setDefaultOption("do nothing", kNothingAuto);
-    m_chooser.addOption("launch note and drive", kLaunchAndDrive);
-    m_chooser.addOption("launch", kLaunch);
     m_chooser.addOption("drive", kDrive);
     SmartDashboard.putData("Auto choices", m_chooser);
 
@@ -188,19 +186,19 @@ public class Robot extends TimedRobot {
      *
      * Add white tape to wheel to help determine spin direction.
      */
-    m_feedWheel.setInverted(true);
-    m_launchWheel.setInverted(true);
+    // m_feedWheel.setInverted(true);
+    // m_launchWheel.setInverted(true);
 
     /*
      * Apply the current limit to the launching mechanism
      */
-    m_feedWheel.setSmartCurrentLimit(FEEDER_CURRENT_LIMIT_A);
-    m_launchWheel.setSmartCurrentLimit(LAUNCHER_CURRENT_LIMIT_A);
+    // m_feedWheel.setSmartCurrentLimit(FEEDER_CURRENT_LIMIT_A);
+    // m_launchWheel.setSmartCurrentLimit(LAUNCHER_CURRENT_LIMIT_A);
 
     /*
      * Inverting and current limiting for roller claw and climber
      */
-    m_rollerClaw.setInverted(false);
+   // m_rollerClaw.setInverted(false);
     m_climber.setInverted(false);
 
     TalonFXConfiguration configuration = new TalonFXConfiguration();
@@ -212,7 +210,7 @@ public class Robot extends TimedRobot {
     currentLimitsConfigs.SupplyCurrentLimitEnable = true; // And enable it
 
     configuration.CurrentLimits = currentLimitsConfigs;
-    m_rollerClaw.setSmartCurrentLimit(60);
+    //m_rollerClaw.setSmartCurrentLimit(60);
     //m_climber.setSmartCurrentLimit(60);
     m_climber.getConfigurator().apply(configuration.CurrentLimits);
     /*
@@ -220,7 +218,7 @@ public class Robot extends TimedRobot {
      * 
      * Brake mode is best for these mechanisms
      */
-    m_rollerClaw.setIdleMode(IdleMode.kBrake);
+    //m_rollerClaw.setIdleMode(IdleMode.kBrake);
     //m_climber.setIdleMode(IdleMode.kBrake);
     m_climber.setNeutralMode(NeutralModeValue.Brake);
   }
@@ -251,7 +249,7 @@ public class Robot extends TimedRobot {
   double AUTO_DRIVE_TIME_S;
 
   double AUTO_DRIVE_SPEED;
-  double AUTO_LAUNCHER_SPEED;
+  //double AUTO_LAUNCHER_SPEED;
 
   double autonomousStartTime;
 
@@ -264,12 +262,12 @@ public class Robot extends TimedRobot {
     rightRear.setIdleMode(IdleMode.kBrake);
     rightFront.setIdleMode(IdleMode.kBrake);
 
-    AUTO_LAUNCH_DELAY_S = 2;
+    //AUTO_LAUNCH_DELAY_S = 2;
     AUTO_DRIVE_DELAY_S = 3;
 
     AUTO_DRIVE_TIME_S = 2.0;
     AUTO_DRIVE_SPEED = -0.5;
-    AUTO_LAUNCHER_SPEED = 1;
+    //AUTO_LAUNCHER_SPEED = 1;
     
     /*
      * Depeding on which auton is selected, speeds for the unwanted subsystems are set to 0
@@ -277,18 +275,19 @@ public class Robot extends TimedRobot {
      *
      * For kDrive you can also change the kAutoDriveBackDelay
      */
-    if(m_autoSelected == kLaunch)
+    // if(m_autoSelected == kLaunch)
+    // {
+    //   AUTO_DRIVE_SPEED = 0;
+    // }
+    // else if(m_autoSelected == kDrive)
+    // {
+    //   //AUTO_LAUNCHER_SPEED = 0;
+    // }
+    // else 
+    if(m_autoSelected == kNothingAuto)
     {
       AUTO_DRIVE_SPEED = 0;
-    }
-    else if(m_autoSelected == kDrive)
-    {
-      AUTO_LAUNCHER_SPEED = 0;
-    }
-    else if(m_autoSelected == kNothingAuto)
-    {
-      AUTO_DRIVE_SPEED = 0;
-      AUTO_LAUNCHER_SPEED = 0;
+      //AUTO_LAUNCHER_SPEED = 0;
     }
 
     autonomousStartTime = Timer.getFPGATimestamp();
@@ -311,19 +310,19 @@ public class Robot extends TimedRobot {
      */
     if(timeElapsed < AUTO_LAUNCH_DELAY_S)
     {
-      m_launchWheel.set(AUTO_LAUNCHER_SPEED);
+      //m_launchWheel.set(AUTO_LAUNCHER_SPEED);
       m_drivetrain.arcadeDrive(0, 0);
 
     }
     else if(timeElapsed < AUTO_DRIVE_DELAY_S)
     {
-      m_feedWheel.set(AUTO_LAUNCHER_SPEED);
+      //m_feedWheel.set(AUTO_LAUNCHER_SPEED);
       m_drivetrain.arcadeDrive(0, 0);
     }
     else if(timeElapsed < AUTO_DRIVE_DELAY_S + AUTO_DRIVE_TIME_S)
     {
-      m_launchWheel.set(0);
-      m_feedWheel.set(0);
+      //m_launchWheel.set(0);
+      //m_feedWheel.set(0);
       m_drivetrain.arcadeDrive(AUTO_DRIVE_SPEED, 0);
     }
     else
@@ -361,39 +360,39 @@ public class Robot extends TimedRobot {
     /*
      * Spins up the launcher wheel
      */
-    if (m_manipController.getRawButton(1)) {
-      m_launchWheel.set(LAUNCHER_SPEED);
-    }
-    else if(m_manipController.getRawButtonReleased(1))
-    {
-      m_launchWheel.set(0);
-    }
+    // if (m_manipController.getRawButton(1)) {
+    //   m_launchWheel.set(LAUNCHER_SPEED);
+    // }
+    // else if(m_manipController.getRawButtonReleased(1))
+    // {
+    //   m_launchWheel.set(0);
+    // }
 
     /*
      * Spins feeder wheel, wait for launch wheel to spin up to full speed for best results
      */
-    if (m_manipController.getRawButton(6))
-    {
-      m_feedWheel.set(FEEDER_OUT_SPEED);
-    }
-    else if(m_manipController.getRawButtonReleased(6))
-    {
-      m_feedWheel.set(0);
-    }
+    // if (m_manipController.getRawButton(6))
+    // {
+    //   //m_feedWheel.set(FEEDER_OUT_SPEED);
+    // }
+    // else if(m_manipController.getRawButtonReleased(6))
+    // {
+    //   //m_feedWheel.set(0);
+    // }
 
     /*
      * While the button is being held spin both motors to intake note
      */
-    if(m_manipController.getRawButton(5))
-    {
-      m_launchWheel.set(-LAUNCHER_SPEED);
-      m_feedWheel.set(FEEDER_IN_SPEED);
-    }
-    else if(m_manipController.getRawButtonReleased(5))
-    {
-      m_launchWheel.set(0);
-      m_feedWheel.set(0);
-    }
+    // if(m_manipController.getRawButton(5))
+    // {
+    //   //m_launchWheel.set(-LAUNCHER_SPEED);
+    //   //m_feedWheel.set(FEEDER_IN_SPEED);
+    // }
+    // else if(m_manipController.getRawButtonReleased(5))
+    // {
+    //   //m_launchWheel.set(0);
+    //   //m_feedWheel.set(0);
+    // }
 
     /*
      * While the amp button is being held, spin both motors to "spit" the note
@@ -401,16 +400,16 @@ public class Robot extends TimedRobot {
      *
      * (this may take some driver practice to get working reliably)
      */
-    if(m_manipController.getRawButton(2))
-    {
-      m_feedWheel.set(FEEDER_AMP_SPEED);
-      m_launchWheel.set(LAUNCHER_AMP_SPEED);
-    }
-    else if(m_manipController.getRawButtonReleased(2))
-    {
-      m_feedWheel.set(0);
-      m_launchWheel.set(0);
-    }
+    // if(m_manipController.getRawButton(2))
+    // {
+    //   //m_feedWheel.set(FEEDER_AMP_SPEED);
+    //   //m_launchWheel.set(LAUNCHER_AMP_SPEED);
+    // }
+    // else if(m_manipController.getRawButtonReleased(2))
+    // {
+    //   //m_feedWheel.set(0);
+    //   //m_launchWheel.set(0);
+    // }
 
     /**
      * Hold one of the two buttons to either intake or exjest note from roller claw
@@ -420,18 +419,18 @@ public class Robot extends TimedRobot {
      * It may be best to have the roller claw passively on throughout the match to 
      * better retain notes but we did not test this
      */ 
-    if(m_manipController.getRawButton(3))
-    {
-      m_rollerClaw.set(CLAW_OUTPUT_POWER);
-    }
-    else if(m_manipController.getRawButton(4))
-    {
-      m_rollerClaw.set(-CLAW_OUTPUT_POWER);
-    }
-    else
-    {
-      m_rollerClaw.set(0);
-    }
+    // if(m_manipController.getRawButton(3))
+    // {
+    //   m_rollerClaw.set(CLAW_OUTPUT_POWER);
+    // }
+    // else if(m_manipController.getRawButton(4))
+    // {
+    //   m_rollerClaw.set(-CLAW_OUTPUT_POWER);
+    // }
+    // else
+    // {
+    //   m_rollerClaw.set(0);
+    // }
 
     /**
      * POV is the D-PAD (directional pad) on your controller, 0 == UP and 180 == DOWN
